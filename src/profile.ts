@@ -38,6 +38,7 @@ export async function fetchProfile(username: string) {
   class Profile {
     UUID = doc.querySelector('samp')!.textContent
     names: Record<string, string | Date | number>[] = []
+    skins: Record<string, string | Date>[] = []
     NameMC: string | NameMC = 'Profile not claimed'
 
     constructor() {
@@ -45,6 +46,12 @@ export async function fetchProfile(username: string) {
         this.names.push({
           username: doc.querySelectorAll('a[translate="no"]')[i].textContent,
           changeDate: doc.querySelectorAll('time')[i] === undefined ? 0 : new Date(doc.querySelectorAll('time')[i].textContent)
+        })
+      }
+      for (let i = 0; i < doc.querySelectorAll('.card-body.text-center')[1].children.length; i++) {
+        this.skins.push({
+          texture: `https://namemc.com/texture${doc.querySelectorAll('.card-body.text-center')[1].children[i].getAttribute('href')!.substring(5)}.png`,
+          date: new Date(doc.querySelectorAll('.card-body.text-center')[1].children[i].children[0].getAttribute('title')!)
         })
       }
       if (doc.querySelector('.alert-info') === null) this.NameMC = new NameMC()
