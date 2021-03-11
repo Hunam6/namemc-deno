@@ -33,6 +33,7 @@ export async function fetchProfile(username: string) {
   class NameMC {
     views = parseInt(doc.querySelectorAll('.col-auto')[3].textContent)
     rank = doc.querySelector('a[href*="store"].namemc-rank')! === null ? false : true
+    //TODO: detect Owner (CoderTim) and moderator (7x2) rank
     location = 'Location not set'
     accounts: Record<string, string>[] = []
     friends: Record<string, string | boolean>[] = []
