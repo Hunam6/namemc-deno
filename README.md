@@ -6,8 +6,8 @@
 #### Example
 
 ```typescript
-import {lyrics} from 'https://deno.land/x/lyrics/mod.ts'
-lyrics('radioactive imagine dragons').then((res) => console.log(res))
+import {fetchProfile} from 'https://deno.land/x/namemc/mod.ts'
+fetchProfile('ilyNess').then(res => console.log(res))
 ```
 
 <details><summary>Output</summary>
