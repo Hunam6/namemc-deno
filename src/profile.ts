@@ -37,12 +37,12 @@ export async function fetchProfile(username: string) {
 
   class Profile {
     UUID = doc.querySelector('samp')!.textContent
-    nameHistory: Record<string, string | Date | number>[] = []
+    names: Record<string, string | Date | number>[] = []
     NameMC: string | NameMC = 'Profile not claimed'
 
     constructor() {
       for (let i = 0; i < doc.querySelectorAll('a[translate="no"]').length; i++) {
-        this.nameHistory.push({
+        this.names.push({
           username: doc.querySelectorAll('a[translate="no"]')[i].textContent,
           changeDate: doc.querySelectorAll('time')[i] === undefined ? 0 : new Date(doc.querySelectorAll('time')[i].textContent)
         })
