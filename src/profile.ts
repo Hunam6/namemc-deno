@@ -8,6 +8,7 @@ export async function fetchProfile(username: string) {
     location = 'Location not set'
     accounts: Record<string, string>[] = []
     friends: Record<string, string | boolean>[] = []
+    servers: Record<string, string>[] = []
     constructor() {
       if (doc.querySelector('.emoji.mr-1')! !== null)
         this.location = doc
@@ -29,6 +30,15 @@ export async function fetchProfile(username: string) {
           this.friends.push({
             username: doc.querySelector('.player-list')!.children[i].textContent,
             rank: doc.querySelector('.player-list')!.children[i].getAttribute('class') === 'namemc-rank namemc-rank-10' ? true : false,
+          })
+        }
+      }
+      if (doc.querySelector('a[href*="/server/"]')! !== null) {
+        for (let i = 0; i < doc.querySelectorAll('a[href*="/server/"]')!.length; i++) {
+          this.servers.push({
+            name: doc.querySelectorAll('a[href*="/server/"]')![i].textContent,
+            ip: doc.querySelectorAll('a[href*="/server/"]')![i].parentElement!.children[0].getAttribute('href')!.substring(8),
+            icon: doc.querySelectorAll('a[href*="/server/"]')![i].parentElement!.children[0].children[0].getAttribute('src')!
           })
         }
       }
