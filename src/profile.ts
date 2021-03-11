@@ -2,7 +2,7 @@ import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
 
 export async function fetchProfile(username: string) {
   const doc = new DOMParser().parseFromString(await fetch(`https://mine.ly/${username}`).then(res => res.text()), 'text/html')!
-  let longFriends: Record<string,string>[]
+  let longFriends: Record<string, string>[]
   if (doc.querySelector('.player-list')!.children[0].textContent === '\nShow\n') {
     longFriends = await fetch(`https://api.namemc.com/profile/${doc.querySelector('samp')!.textContent}/friends`).then(res => res.json())
   }
@@ -31,6 +31,7 @@ export async function fetchProfile(username: string) {
   }
 
   class NameMC {
+    views = parseInt(doc.querySelectorAll('.col-auto')[3].textContent)
     rank = doc.querySelector('a[href*="store"].namemc-rank')! === null ? false : true
     location = 'Location not set'
     accounts: Record<string, string>[] = []
