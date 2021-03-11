@@ -1,0 +1,1 @@
+export {fetchProfile} from './src/profile.ts'
